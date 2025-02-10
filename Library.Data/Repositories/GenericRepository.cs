@@ -59,7 +59,8 @@ namespace Library.Data.Repositories
 
         public async Task Update(T entity)
         {
-            _dbSet.Update(entity);//entity
+            var existingEntity = await GetById(entity.Id);
+            _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
         }
     }
