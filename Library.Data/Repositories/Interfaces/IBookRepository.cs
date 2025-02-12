@@ -1,6 +1,8 @@
-﻿namespace Library.Data.Repositories.Inteterfaces
+﻿using Library.Data.Models;
+
+namespace Library.Data.Repositories.Interfaces
 {
-    public interface IBookRepository
+    public interface IBookRepository : IGenericRepository<Book>
     {
     }
 }

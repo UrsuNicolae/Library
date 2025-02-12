@@ -1,10 +1,8 @@
 ﻿using Library.Data.Models;
 
-namespace Library.Data.Repositories.Inteterfaces
+namespace Library.Data.Repositories.Interfaces
 {
-    public interface IAuthorRepository
+    public interface IAuthorRepository : IGenericRepository<Author>
     {
-        Task<Author> GetById(int id);
-
     }
 }

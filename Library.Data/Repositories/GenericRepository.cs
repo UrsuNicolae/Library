@@ -8,7 +8,7 @@ namespace Library.Data.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        private readonly DataContext _context;
+        internal readonly DataContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(DataContext context)
@@ -44,7 +44,7 @@ namespace Library.Data.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
         public async Task<T> GetById(int id)
@@ -52,7 +52,7 @@ namespace Library.Data.Repositories
             var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
             if (entity == null)
             {
-                throw new KeyNotFoundException($"Entity: {nameof(T)} not found!");
+                throw new KeyNotFoundException($"Entity: {typeof(T).Name} not found!");
             }
             return entity;
         }
